@@ -1,6 +1,8 @@
 package com.example.smarthome
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -15,6 +17,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -47,11 +50,15 @@ fun LottieExample() {
 
     val progress by animateLottieCompositionAsState(
         composition,
-        iterations = LottieConstants.IterateForever,
+        iterations = 1,
         isPlaying = isPlaying,
         speed = speed,
         restartOnPlay = false
     )
+
+    if(progress == 1f){
+        Toast.makeText(LocalContext.current, "끝", Toast.LENGTH_SHORT).show()
+    }
 
     Column(
         Modifier
@@ -77,7 +84,7 @@ fun LottieExample() {
 
         Row(
             horizontalArrangement = Arrangement.SpaceAround,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().padding(5.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Row(
@@ -143,6 +150,7 @@ fun LottieExample() {
             )
         }
     }
+
 }
 
 
