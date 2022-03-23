@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "SmartHome"
 include ':app'
+include ':notcompose'
