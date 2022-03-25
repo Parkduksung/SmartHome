@@ -1,6 +1,5 @@
 package com.example.notcompose.ui.outdoor
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.example.notcompose.R
@@ -8,8 +7,7 @@ import com.example.notcompose.base.BaseActivity
 import com.example.notcompose.base.ViewState
 import com.example.notcompose.constant.SensorType
 import com.example.notcompose.databinding.ActivityOutdoorBinding
-import com.example.notcompose.ui.ext.startSensorActivity
-import com.example.notcompose.ui.sensor.SensorActivity
+import com.example.notcompose.ext.startSensorActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
