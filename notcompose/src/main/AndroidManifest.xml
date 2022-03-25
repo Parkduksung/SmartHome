@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartHome">
         <activity
-            android:name=".ui.splash.SplashActivity"
+            android:name=".ui.home.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,16 +22,20 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".ui.home.HomeActivity"
-            android:exported="false"
-            android:launchMode="singleTask" />
+        <!--        <activity-->
+        <!--            android:name=".ui.home.HomeActivity"-->
+        <!--            android:exported="false"-->
+        <!--            android:launchMode="singleTask" />-->
 
         <activity
             android:name=".ui.indoor.IndoorActivity"
             android:exported="false" />
         <activity
             android:name=".ui.outdoor.OutdoorActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.sensor.SensorActivity"
             android:exported="false" />
     </application>
 

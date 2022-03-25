@@ -5,9 +5,10 @@
       <map>
         <entry key="notcompose/src/main/res/layout/activity_analysis.xml" value="0.17889492753623187" />
         <entry key="notcompose/src/main/res/layout/activity_home.xml" value="0.17889492753623187" />
-        <entry key="notcompose/src/main/res/layout/activity_indoor.xml" value="0.17889492753623187" />
+        <entry key="notcompose/src/main/res/layout/activity_indoor.xml" value="0.22" />
         <entry key="notcompose/src/main/res/layout/activity_main.xml" value="0.17889492753623187" />
         <entry key="notcompose/src/main/res/layout/activity_outdoor.xml" value="0.17889492753623187" />
+        <entry key="notcompose/src/main/res/layout/activity_sensor.xml" value="0.2875905797101449" />
         <entry key="notcompose/src/main/res/layout/activity_splash.xml" value="0.17889492753623187" />
       </map>
     </option>
