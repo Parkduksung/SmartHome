@@ -6,12 +6,12 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.example.notcompose"
         minSdk 26
-        targetSdk 32
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
@@ -102,4 +102,7 @@ dependencies {
     //ktx
     implementation "androidx.fragment:fragment-ktx:$activity_version"
     implementation "androidx.activity:activity-ktx:$fragment_version"
+
+    //MPAndroidChart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }
