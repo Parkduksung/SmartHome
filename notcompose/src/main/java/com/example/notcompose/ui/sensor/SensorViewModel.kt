@@ -30,28 +30,34 @@ class SensorViewModel @Inject constructor(
         ioScope {
             while (true) {
 
-                sensorRepository.getSensorData { result ->
-
-                    when (result) {
-                        is Result.Success -> {
-                            result.data
-                        }
-
-                        is Result.Error -> {
-
-                        }
-
-                    }
-                }
-
-//                uiScope {
-//                    viewStateChanged(
-//                        SensorViewState.GetSensorData(
-//                            sensorTypeObservableField.get()!!.convertSensorTitle(),
-//                            ((20..40).random())
-//                        )
-//                    )
+//                sensorRepository.getSensorData { result ->
+//
+//                    when (result) {
+//                        is Result.Success -> {
+//                            viewStateChanged(
+//                                SensorViewState.GetSensorData(
+//                                    sensorTypeObservableField.get()!!.convertSensorTitle(),
+//                                    ((20..40).random())
+//                                )
+//                            )
+////                            result.data.result[0]
+//                        }
+//
+//                        is Result.Error -> {
+//
+//                        }
+//
+//                    }
 //                }
+
+                uiScope {
+                    viewStateChanged(
+                        SensorViewState.GetSensorData(
+                            sensorTypeObservableField.get()!!.convertSensorTitle(),
+                            ((20..40).random())
+                        )
+                    )
+                }
 
                 delay(RENEW_INTERVAL)
             }

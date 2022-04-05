@@ -1,8 +1,8 @@
 package com.example.notcompose.di
 
 import com.example.notcompose.data.SensorApi
-import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
@@ -13,12 +13,15 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object ApiModule {
 
-    private const val BASE_URL ="http://192.168.184.219/"
+    private const val BASE_URL = "http://192.168.45.187/"
 
     @Singleton
-    @Binds
+    @Provides
     fun provideSensorApi(): SensorApi =
-        Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(BASE_URL).build()
+        Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(BASE_URL)
+            .build()
             .create(SensorApi::class.java)
 
 }
