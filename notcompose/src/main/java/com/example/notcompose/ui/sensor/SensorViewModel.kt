@@ -30,33 +30,24 @@ class SensorViewModel @Inject constructor(
         ioScope {
             while (true) {
 
-//                sensorRepository.getSensorData { result ->
-//
-//                    when (result) {
-//                        is Result.Success -> {
-//                            viewStateChanged(
-//                                SensorViewState.GetSensorData(
-//                                    sensorTypeObservableField.get()!!.convertSensorTitle(),
-//                                    ((20..40).random())
-//                                )
-//                            )
-////                            result.data.result[0]
-//                        }
-//
-//                        is Result.Error -> {
-//
-//                        }
-//
-//                    }
-//                }
+                sensorRepository.getSensorData { result ->
+                    when (result) {
+                        is Result.Success -> {
+                            viewStateChanged(
+                                SensorViewState.GetSensorData(
+                                    sensorTypeObservableField.get()!!.convertSensorTitle(),
+                                    result.data.result[0].getData(
+                                        sensorTypeObservableField.get() ?: ""
+                                    ).toInt()
+                                )
+                            )
+                        }
 
-                uiScope {
-                    viewStateChanged(
-                        SensorViewState.GetSensorData(
-                            sensorTypeObservableField.get()!!.convertSensorTitle(),
-                            ((20..40).random())
-                        )
-                    )
+                        is Result.Error -> {
+                            viewStateChanged(SensorViewState.Error("데이터를 가져올 수 없습니다."))
+                        }
+
+                    }
                 }
 
                 delay(RENEW_INTERVAL)

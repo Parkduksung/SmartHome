@@ -14,4 +14,38 @@ data class Result(
     val outside_hum: String,
     val outside_rain: String,
     val outside_tem: String
-)
+) {
+
+    fun getData(type: String): String =
+        when (type) {
+            "innerTemp" -> {
+                inside_tem
+            }
+            "innerDust" -> {
+                inside_dust
+            }
+            "innerLight" -> {
+                inside_lux
+            }
+            "innerHumidity" -> {
+                inside_hum
+            }
+            "innerGas" -> {
+                inside_gas
+            }
+            "outTemp" -> {
+                outside_tem
+            }
+            "outDust" -> {
+                outside_dust
+            }
+            "outHumidity" -> {
+                outside_hum
+            }
+            "outRain" -> {
+                outside_rain
+            }
+            else -> ""
+        }
+
+}
