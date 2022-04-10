@@ -6,7 +6,6 @@ import com.example.notcompose.base.BaseViewModel
 import com.example.notcompose.data.repo.SensorRepository
 import com.example.notcompose.ext.convertSensorTitle
 import com.example.notcompose.ext.ioScope
-import com.example.notcompose.ext.uiScope
 import com.example.notcompose.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -56,6 +55,6 @@ class SensorViewModel @Inject constructor(
     }
 
     companion object {
-        private const val RENEW_INTERVAL = 1000L
+        const val RENEW_INTERVAL = 1000L
     }
 }

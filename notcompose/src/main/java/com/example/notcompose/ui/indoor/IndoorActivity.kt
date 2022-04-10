@@ -28,6 +28,10 @@ class IndoorActivity : BaseActivity<ActivityIndoorBinding>(R.layout.activity_ind
         innerViewModel.viewStateLiveData.observe(this) { viewState: ViewState? ->
             (viewState as? SensorType)?.let { onChangedInnerSensor(viewState) }
         }
+
+        innerViewModel.viewStateLiveData.observe(this) { viewState: ViewState? ->
+            (viewState as? IndoorViewState)?.let { onChangedIndoorViewState(viewState) }
+        }
     }
 
     /**
@@ -54,5 +58,14 @@ class IndoorActivity : BaseActivity<ActivityIndoorBinding>(R.layout.activity_ind
 
         }
     }
+
+    private fun onChangedIndoorViewState(viewState: IndoorViewState) {
+        when (viewState) {
+            is IndoorViewState.GetSensorData -> {
+                binding.result = viewState.data
+            }
+        }
+    }
+
 
 }

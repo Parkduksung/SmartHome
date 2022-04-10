@@ -28,6 +28,10 @@ class OutdoorActivity : BaseActivity<ActivityOutdoorBinding>(R.layout.activity_o
         outerViewModel.viewStateLiveData.observe(this) { viewState: ViewState? ->
             (viewState as? SensorType)?.let { onChangedInnerSensor(viewState) }
         }
+
+        outerViewModel.viewStateLiveData.observe(this) { viewState: ViewState? ->
+            (viewState as? OutdoorViewState)?.let { onChangedOutdoorViewState(viewState) }
+        }
     }
 
     /**
@@ -50,5 +54,15 @@ class OutdoorActivity : BaseActivity<ActivityOutdoorBinding>(R.layout.activity_o
             }
         }
     }
+
+
+    private fun onChangedOutdoorViewState(viewState: OutdoorViewState) {
+        when (viewState) {
+            is OutdoorViewState.GetSensorData -> {
+                binding.result = viewState.data
+            }
+        }
+    }
+
 
 }
