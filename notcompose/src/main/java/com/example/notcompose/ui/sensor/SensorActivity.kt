@@ -79,7 +79,7 @@ class SensorActivity : BaseActivity<ActivitySensorBinding>(R.layout.activity_sen
         binding.lineChart.data = lineData
     }
 
-    private fun addEntry(type: String, sensorData: Int) {
+    private fun addEntry(type: String, sensorData: Float) {
         val data = binding.lineChart.data
 
         data?.let {
@@ -89,7 +89,7 @@ class SensorActivity : BaseActivity<ActivitySensorBinding>(R.layout.activity_sen
                 data.addDataSet(set)
             }
 
-            floatTemp = sensorData.toFloat()
+            floatTemp = sensorData
             data.addEntry(Entry(set.entryCount.toFloat(), floatTemp!!), 0)
             data.notifyDataChanged()
             binding.lineChart.apply {

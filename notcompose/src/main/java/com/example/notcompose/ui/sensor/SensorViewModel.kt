@@ -38,7 +38,7 @@ class SensorViewModel @Inject constructor(
                                     sensorTypeObservableField.get()!!.convertSensorTitle(),
                                     result.data.result[0].getData(
                                         sensorTypeObservableField.get() ?: ""
-                                    ).toInt()
+                                    ).toFloat()
                                 )
                             )
                         }

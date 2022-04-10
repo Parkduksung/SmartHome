@@ -13,7 +13,10 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object ApiModule {
 
-    private const val BASE_URL = "http://192.168.45.187/"
+    /**
+     * 매번 ip 바꾸는 부분은 여기를 바꿔주시면 됩니다.
+     */
+    private const val BASE_URL = "http://172.20.10.4/"
 
     @Singleton
     @Provides

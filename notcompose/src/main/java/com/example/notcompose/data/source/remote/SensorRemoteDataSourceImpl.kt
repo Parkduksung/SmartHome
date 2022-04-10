@@ -2,12 +2,11 @@ package com.example.notcompose.data.source.remote
 
 import com.example.notcompose.data.SensorApi
 import com.example.notcompose.data.model.SensorResponse
+import com.example.notcompose.util.Result
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
-import com.example.notcompose.util.Result
-import java.lang.Exception
 
 class SensorRemoteDataSourceImpl @Inject constructor(private val sensorApi: SensorApi) :
     SensorRemoteDataSource {

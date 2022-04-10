@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 interface SensorApi {
 
-    @GET("inside.php")
+    @GET("window.php")
     fun getSensorData(): Call<SensorResponse>
 }
