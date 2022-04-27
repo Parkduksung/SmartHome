@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">SmartHome</string>
+
+    <string name="temp">%s℃</string>
+    <string name="gas">%sppm</string>
+    <string name="dust">%s㎍/㎥</string>
+    <string name="lux">%s㏓</string>
+    <string name="humidity">%s％</string>
+    <string name="rain">%s％</string>
+
 </resources>
