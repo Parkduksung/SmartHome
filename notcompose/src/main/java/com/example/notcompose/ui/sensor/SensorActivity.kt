@@ -6,8 +6,9 @@ import androidx.activity.viewModels
 import com.example.notcompose.R
 import com.example.notcompose.base.BaseActivity
 import com.example.notcompose.base.ViewState
+import com.example.notcompose.data.model.ChartDataItem
 import com.example.notcompose.databinding.ActivitySensorBinding
-import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
@@ -20,12 +21,12 @@ import dagger.hilt.android.AndroidEntryPoint
 class SensorActivity : BaseActivity<ActivitySensorBinding>(R.layout.activity_sensor) {
 
     private val sensorViewModel by viewModels<SensorViewModel>()
-    private var floatTemp: Float? = 10f
+
+    lateinit var lineChart: LineChart
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViewModel()
-        setup()
     }
 
     /**
@@ -44,69 +45,28 @@ class SensorActivity : BaseActivity<ActivitySensorBinding>(R.layout.activity_sen
     private fun onChangedSensorState(viewState: SensorViewState) {
         when (viewState) {
             is SensorViewState.GetSensorData -> {
-                addEntry(viewState.type, viewState.data)
+            }
+
+            is SensorViewState.GetSensorDataList -> {
+                lineChart(viewState.data)
             }
 
         }
     }
 
+    private fun lineChart(
+        chartItem: List<ChartDataItem>,
+        displayName: String = ""
+    ) {
 
-    private fun setup() {
-        val xAxis = binding.lineChart.xAxis
+        lineChart = findViewById(R.id.lineChart)
 
-        xAxis.apply {
-            position = XAxis.XAxisPosition.BOTTOM
-            isGranularityEnabled = true
-            textSize = 10f
-            setDrawGridLines(false)
-            granularity = 1f
-            axisMinimum = 2f
+        val entries = ArrayList<Entry>()
+        for (i in chartItem.indices) {
+            entries.add(Entry(chartItem[i].valData, i))
         }
 
-        binding.lineChart.apply {
-            axisRight.isEnabled = true
-            axisLeft.axisMaximum = 50f
-            legend.apply {
-                textSize = 15f
-                verticalAlignment = Legend.LegendVerticalAlignment.TOP
-                horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
-                orientation = Legend.LegendOrientation.HORIZONTAL
-                setDrawInside(false)
-            }
-        }
-
-        val lineData = LineData()
-        binding.lineChart.data = lineData
-    }
-
-    private fun addEntry(type: String, sensorData: Float) {
-        val data = binding.lineChart.data
-
-        data?.let {
-            var set: ILineDataSet? = data.getDataSetByIndex(0)
-            if (set == null) {
-                set = createSet(type)
-                data.addDataSet(set)
-            }
-
-            floatTemp = sensorData
-            data.addEntry(Entry(set.entryCount.toFloat(), floatTemp!!), 0)
-            data.notifyDataChanged()
-            binding.lineChart.apply {
-                notifyDataSetChanged()
-                moveViewToX(data.entryCount.toFloat())
-                setVisibleXRangeMaximum(8f)
-                setPinchZoom(false)
-                isDoubleTapToZoomEnabled = false
-                description.text = ""
-                setExtraOffsets(8f, 16f, 8f, 16f)
-            }
-        }
-    }
-
-    private fun createSet(type: String): ILineDataSet {
-        val set = LineDataSet(null, type)
-        set.apply {
+        val depenses = LineDataSet(entries, displayName).apply {
             axisDependency = YAxis.AxisDependency.LEFT
             color = Color.DKGRAY
             setCircleColor(Color.GREEN)
@@ -118,6 +78,29 @@ class SensorActivity : BaseActivity<ActivitySensorBinding>(R.layout.activity_sen
             highLightColor = Color.BLACK
             setDrawValues(true)
         }
-        return set
+
+        val labels = ArrayList<String>()
+        for (i in chartItem.indices) {
+            labels.add(chartItem[i].lableData)
+        }
+
+        val xAxis = lineChart.xAxis
+        xAxis.apply {
+            position = XAxis.XAxisPosition.BOTTOM
+            textSize = 8f
+            setDrawGridLines(false)
+        }
+
+        val legend = lineChart.legend
+
+        legend.setDrawInside(false)
+
+        val dataSets = ArrayList<ILineDataSet>()
+        dataSets.add(depenses as ILineDataSet)
+        val data = LineData(labels, dataSets)
+        lineChart.data = data
+        lineChart.setDescription("")
+        lineChart.invalidate()
     }
+
 }

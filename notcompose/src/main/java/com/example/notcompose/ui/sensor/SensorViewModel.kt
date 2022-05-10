@@ -3,6 +3,7 @@ package com.example.notcompose.ui.sensor
 import android.app.Application
 import androidx.databinding.ObservableField
 import com.example.notcompose.base.BaseViewModel
+import com.example.notcompose.data.model.ChartDataItem
 import com.example.notcompose.data.repo.SensorRepository
 import com.example.notcompose.ext.convertSensorTitle
 import com.example.notcompose.ext.ioScope
@@ -17,14 +18,13 @@ class SensorViewModel @Inject constructor(
     private val sensorRepository: SensorRepository
 ) : BaseViewModel(app) {
 
-
     val sensorTypeObservableField = ObservableField<String>()
-
 
     init {
         subscribeSensorData()
     }
 
+    //7개로.
     private fun subscribeSensorData() {
         ioScope {
             while (true) {
@@ -32,12 +32,18 @@ class SensorViewModel @Inject constructor(
                 sensorRepository.getSensorData { result ->
                     when (result) {
                         is Result.Success -> {
+
+                            val toChartDataList = result.data.result.map {
+                                ChartDataItem(
+                                    "",
+                                    it.getData(sensorTypeObservableField.get() ?: "").toFloat()
+                                )
+                            }
+
                             viewStateChanged(
-                                SensorViewState.GetSensorData(
+                                SensorViewState.GetSensorDataList(
                                     sensorTypeObservableField.get()!!.convertSensorTitle(),
-                                    result.data.result[0].getData(
-                                        sensorTypeObservableField.get() ?: ""
-                                    ).toFloat()
+                                    toChartDataList
                                 )
                             )
                         }
