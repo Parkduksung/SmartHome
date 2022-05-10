@@ -5,4 +5,6 @@ import com.example.notcompose.util.Result
 
 interface SensorRepository {
     fun getSensorData(callback: (Result<SensorResponse>) -> Unit)
+
+    fun getResult(callback: (Boolean) -> Unit)
 }

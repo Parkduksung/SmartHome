@@ -10,4 +10,8 @@ class SensorRepositoryImpl @Inject constructor(private val sensorRemoteDataSourc
     override fun getSensorData(callback: (Result<SensorResponse>) -> Unit) {
         sensorRemoteDataSource.getSensorData(callback)
     }
+
+    override fun getResult(callback: (Boolean) -> Unit) {
+        sensorRemoteDataSource.getResult(callback)
+    }
 }
