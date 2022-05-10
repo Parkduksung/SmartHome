@@ -104,5 +104,5 @@ dependencies {
     implementation "androidx.activity:activity-ktx:$fragment_version"
 
     //MPAndroidChart
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v2.2.5'
 }
